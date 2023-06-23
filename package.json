@@ -2,10 +2,22 @@
   "name": "bloodstock-ticket-resale-notifier",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
+    "start": "ts-node ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "css-select": "^5.1.0",
+    "deep-object-diff": "^1.1.9",
+    "dotenv": "^16.3.1",
+    "htmlparser2": "^9.0.0"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.2",
+    "@types/node-fetch": "^2.6.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.3"
+  }
 }
