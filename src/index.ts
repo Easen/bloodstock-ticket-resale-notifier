@@ -1,3 +1,4 @@
+require('console-stamp')(console);
 import 'dotenv/config'
 import { CronJob } from 'cron';
 import { checkForNewTickets } from './ticket';
