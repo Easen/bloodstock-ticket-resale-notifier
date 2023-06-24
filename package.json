@@ -1,6 +1,6 @@
 {
   "name": "bloodstock-ticket-resale-notifier",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "scripts": {
     "start": "ts-node ./src/index.ts",
