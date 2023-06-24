@@ -11,7 +11,6 @@
   "dependencies": {
     "cron": "^2.3.1",
     "css-select": "^5.1.0",
-    "deep-object-diff": "^1.1.9",
     "dotenv": "^16.3.1",
     "htmlparser2": "^9.0.0",
     "node-telegram-bot-api": "^0.61.0"

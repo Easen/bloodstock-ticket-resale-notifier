@@ -1,21 +1,25 @@
 import { getEnvVarOrError } from "./get-env-or-error";
 import { readState, writeState } from "./state";
-
 import * as HtmlParser2 from "htmlparser2";
 import { Element, Text } from "domhandler";
 import * as CssSelect from 'css-select';
-import { addedDiff } from 'deep-object-diff';
-
 
 const URL = getEnvVarOrError('URL');
 const PREVIOUS_TICKETS_FILE = getEnvVarOrError('PREVIOUS_TICKETS_FILE');
 
+function arrayDifferences(original: unknown[], updated: unknown[]): Ticket[] {
+    const originalJson = original.map(x => JSON.stringify(x));
+    const updatedJson = updated.map(x => JSON.stringify(x));
+    return updatedJson.filter(x => !originalJson.includes(x))
+        .map(x => JSON.parse(x));
+}
+
 
 export async function checkForNewTickets(): Promise<Record<string, Partial<Ticket>>> {
-    const state = readState(PREVIOUS_TICKETS_FILE);
+    const state = readState<Ticket[]>(PREVIOUS_TICKETS_FILE);
     const tickets: Ticket[] = await fetchTickets(URL);
     writeState(PREVIOUS_TICKETS_FILE, tickets);
-    return addedDiff(state, tickets) as unknown as Record<string, Partial<Ticket>>;
+    return arrayDifferences(state, tickets) as unknown as Record<string, Partial<Ticket>>;
 }
 
 interface Ticket {

@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs';
-export function readState<T extends {}>(file: string, initialValue = {}): T {
+export function readState<T extends unknown>(file: string, initialValue = {}): T {
     let state = initialValue;
     try {
         state = JSON.parse(readFileSync(file).toString());
