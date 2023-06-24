@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/Easen/bloodstock-ticket-resale-notifier/compare/v1.1.0...v1.1.1) (2023-06-24)
+
+
+### Bug Fixes
+
+* **docker:** build on tag or manual trigger ([ff7c51a](https://github.com/Easen/bloodstock-ticket-resale-notifier/commit/ff7c51ada1f5c1a42767d4195d033b79bcb062b7))
+
 ## [1.1.0](https://github.com/Easen/bloodstock-ticket-resale-notifier/compare/v1.0.0...v1.1.0) (2023-06-24)
 
 
