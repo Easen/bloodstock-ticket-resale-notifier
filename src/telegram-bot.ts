@@ -4,9 +4,10 @@ import { readState, writeState } from "./state";
 
 const TELEGRAM_BOT_TOKEN = getEnvVarOrError('TELEGRAM_BOT_TOKEN');
 const TELEGRAM_STATE_FILE = getEnvVarOrError('TELEGRAM_STATE_FILE');
+const TELEGRAM_ADMIN_CHAT_ID = Number.parseInt(getEnvVarOrError('TELEGRAM_ADMIN_CHAT_ID'));
 
 interface TelegramState {
-    subscriptions: number[]
+    subscriptions: number[];
 };
 
 const telegramState = readState<TelegramState>(TELEGRAM_STATE_FILE, { subscriptions: [] });
@@ -39,17 +40,27 @@ export class TelegramSubscriptionBot {
             }
         });
 
+        this.bot.onText(/\/shutdown/, async (msg) => {
+            console.log('TelegramSubscriptionBot - /shutdown', { msg });
+            if (TELEGRAM_ADMIN_CHAT_ID == msg.chat.id) {
+                await this.broadcastToAllSubscribers('This bot has been shutdown. You have been unsubscribed.');
+                telegramState.subscriptions = [];
+                writeState(TELEGRAM_STATE_FILE, telegramState);
+            }
+        });
+
         this.bot.setMyCommands([
             { command: '/start', description: 'Subscribe' },
             { command: '/stop', description: 'Stop' },
-        ])
+        ]);
     }
 
     public broadcastToAllSubscribers(message: string) {
         console.log(`TelegramSubscriptionBot.broadcastToAllSubscribers()`, message)
-        telegramState.subscriptions.forEach((chatId) => {
-            this.bot.sendMessage(chatId, message);
-        });
+        return Promise.all(
+            telegramState.subscriptions
+                .map((chatId) => this.bot.sendMessage(chatId, message))
+        );
     }
 }
 
