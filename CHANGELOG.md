@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/Easen/bloodstock-ticket-resale-notifier/compare/v1.1.1...v1.2.0) (2023-08-04)
+
+
+### Features
+
+* shutdown command ([7006215](https://github.com/Easen/bloodstock-ticket-resale-notifier/commit/7006215b3610ce7de2cce0dd102b75c3e2476816))
+
 ## [1.1.1](https://github.com/Easen/bloodstock-ticket-resale-notifier/compare/v1.1.0...v1.1.1) (2023-06-24)
 
 
